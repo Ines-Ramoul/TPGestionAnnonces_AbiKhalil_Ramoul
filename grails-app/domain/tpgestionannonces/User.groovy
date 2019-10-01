@@ -1,0 +1,20 @@
+package tpgestionannonces
+
+class User {
+
+    static constraints = {
+        username nullable : false, blank: false, size : 5..20
+        password password : true, nullable : false, blank : false, size: 8..30
+        thumbnail nullable : false
+        annonces nullable : true
+    }
+
+    static hasMany = [annonces : Annonce]
+
+    String username
+    String password
+    //ajout du Validator sur le champ password sur les contraintes, sinon verif au niveau Metier
+    Date dateCreated
+    Date lastUptated
+    Illustration thumbnail
+}
