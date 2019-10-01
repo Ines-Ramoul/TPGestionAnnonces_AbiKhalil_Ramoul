@@ -6,7 +6,7 @@ class User {
     String password
     //ajout du Validator sur le champ password sur les contraintes, sinon verif au niveau Metier
     Date dateCreated
-    Date lastUptated
+    Date lastUpdated
     Illustration thumbnail
 
     static hasMany = [annonces : Annonce]

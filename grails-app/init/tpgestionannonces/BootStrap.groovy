@@ -10,15 +10,15 @@ class BootStrap {
         ).save(flush: true, failOnError: true)
 
         (1..5).each {
-                    def annonceInstance = new Annonce(
-                            title: "title",
-                            description: "description",
-                            validTill: new Date(),
-                            state: Boolean.TRUE
+            def annonceInstance = new Annonce(
+                    title: "title",
+                    description: "description",
+                    validTill: new Date(),
+                    state: Boolean.TRUE
                     )
-                            .addToIllustrations(new Illustration(filename: "filename"))
-                            .addToIllustrations(new Illustration(filename: "filename_2"))
-                            .addToIllustrations(new Illustration(filename: "filename_3"))
+                    .addToIllustrations(new Illustration(filename: "filename"))
+                    .addToIllustrations(new Illustration(filename: "filename_2"))
+                    .addToIllustrations(new Illustration(filename: "filename_3"))
             userInstance.addToAnnonces(annonceInstance)
 
         }
