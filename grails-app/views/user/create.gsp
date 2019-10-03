@@ -2,11 +2,11 @@
 <html>
     <head>
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
+%{--        <g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />--}%
         <title><g:message code="default.create.label" args="[entityName]" /></title>
     </head>
     <body>
-        <a href="#create-user" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+%{--       <a href="#create-user" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>--}%
         <div class="nav" role="navigation">
             <ul>
                 <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
@@ -25,14 +25,39 @@
                 </g:eachError>
             </ul>
             </g:hasErrors>
-            <g:form resource="${this.user}" method="POST">
-                <fieldset class="form">
-                    <f:all bean="user"/>
-                </fieldset>
+
+%{--                    <f:all bean="user"/>--}%
+                    <form action="/user/save" method="post" enctype="multipart/form-data" >
+                        <fieldset class="form">
+                            <div class='fieldcontain required'>
+                                <label for='username'>Username
+                                    <span class='required-indicator'>*</span>
+                                </label><input type="text" name="username" value="" required="" maxlength="20" id="username" />
+                            </div><div class='fieldcontain required'>
+                            <label for='password'>Password
+                                <span class='required-indicator'>*</span>
+                            </label><input type="password" name="password" required="" maxlength="30" value="" id="password" />
+                        </div>
+                        <div class='fieldcontain required'>
+                            <label >Thumbnail
+                                <span class='required-indicator'>*</span>
+                            </label>
+                                 <input type="file" name="myFile" />
+                            </div>
+                        </fieldset>
+
+
+                        %{--<fieldset class="buttons">
+                            <input type="submit" name="create" class="save" value="Create" id="create" />
+                        </fieldset>
+                    </form>
+
+                </fieldset>--}%
+
                 <fieldset class="buttons">
                     <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
                 </fieldset>
-            </g:form>
+                    </form>
         </div>
     </body>
 </html>
