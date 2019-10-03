@@ -14,6 +14,7 @@ class UserController {
         respond userService.list(params), model:[userCount: userService.count()]
     }
 
+
     def show(Long id) {
         respond userService.get(id)
     }
@@ -27,6 +28,16 @@ class UserController {
             notFound()
             return
         }
+
+        def file = request.getFile("myFile")
+        String fileName = System.currentTimeMillis() + file.getOriginalFilename()
+        //génère un nom de fichier aleatoir et verifier qu'il n'existe pas deja
+        //sauvegarde le fichier sur le disqUE en utilisant le path renseigné dans le fichier de configuration
+        file.transferTo(new File(grailsApplication.config.maconfig.assets_path+fileName))
+        //garder une trace sur le nom du fichier
+        user.thumbnail = new Illustration(filename : fileName)
+        println("${user.thumbnail.filename}")
+
 
         try {
             userService.save(user)
