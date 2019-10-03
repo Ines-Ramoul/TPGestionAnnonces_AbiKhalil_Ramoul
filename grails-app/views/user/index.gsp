@@ -2,11 +2,11 @@
 <html>
     <head>
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
+%{--        <g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />--}%
         <title><g:message code="default.list.label" args="[entityName]" /></title>
     </head>
     <body>
-        <a href="#list-user" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+%{--        <a href="#list-user" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>--}%
         <div class="nav" role="navigation">
             <ul>
                 <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
@@ -29,7 +29,7 @@
                 <g:each in="${userList}" var="instance">
                     <tr>
                         <td><g:link controller="user" action="show" id="${instance.id}">${instance.username}</g:link></td>
-                        <td><img src="${instance.thumbnail.filename}"/></td>
+                        <td><img width="100" height="100" src="http://localhost:8091/assets/${instance.thumbnail.filename}"/></td>
                         <td>
                             <ul>
                                 <g:each in="${instance.annonces}" var="annonces">
