@@ -6,6 +6,7 @@ import static org.springframework.http.HttpStatus.*
 class AnnonceController {
 
     AnnonceService annonceService
+    AnnonceServiceImplService annonceServiceImplService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -23,13 +24,15 @@ class AnnonceController {
     }
 
     def save(Annonce annonce) {
+
+        String filename = "myFile"
+
         if (annonce == null) {
             notFound()
             return
         }
-
         try {
-            annonceService.save(annonce)
+            annonceServiceImplService.uploadFile(annonce,request, filename)
         } catch (ValidationException e) {
             respond annonce.errors, view:'create'
             return
@@ -42,6 +45,7 @@ class AnnonceController {
             }
             '*' { respond annonce, [status: CREATED] }
         }
+
     }
 
     def edit(Long id) {

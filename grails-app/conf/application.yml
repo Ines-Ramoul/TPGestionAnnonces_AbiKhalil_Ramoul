@@ -73,6 +73,9 @@ grails:
             maxsize: 1000
     controllers:
         defaultScope: singleton
+        upload:
+            maxFileSize: 2000000
+            maxRequestSize: 2000000
     converters:
         encoding: UTF-8
     views:
@@ -137,3 +140,7 @@ environments:
                 defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
 server:
     port: 8091
+
+maconfig:
+    assets_path: "C:/Users/Charbel/IdeaProjects/TPGestionAnnonces_AbiKhalil_Ramoul/grails-app/assets/images/"
+    assets_url: "http://localhost:8091/assets/"
