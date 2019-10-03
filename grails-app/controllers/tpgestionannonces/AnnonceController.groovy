@@ -1,5 +1,6 @@
 package tpgestionannonces
 
+import grails.converters.JSON
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
 
@@ -18,6 +19,7 @@ class AnnonceController {
     def show(Long id) {
         respond annonceService.get(id)
     }
+
 
     def create() {
         respond new Annonce(params)
@@ -99,5 +101,14 @@ class AnnonceController {
             }
             '*'{ render status: NOT_FOUND }
         }
+    }
+
+    def deleteIllustration(){
+        def illustrationId = params.illustrationId
+        def annonceId=params.annonceId
+        def annonceInstance = Annonce.get(annonceId)
+        def illustrationInstance = Annonce.get(illustrationId)
+        annonceInstance.removeFromIllustrations(illustrationInstance)
+        annonceInstance.save(flush:true)
     }
 }
