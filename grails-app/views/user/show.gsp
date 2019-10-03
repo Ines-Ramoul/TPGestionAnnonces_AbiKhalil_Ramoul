@@ -2,11 +2,11 @@
 <html>
     <head>
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
+%{--        <g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />--}%
         <title><g:message code="default.show.label" args="[entityName]" /></title>
     </head>
     <body>
-        <a href="#show-user" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+%{--        <a href="#show-user" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>--}%
         <div class="nav" role="navigation">
             <ul>
                 <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
@@ -19,7 +19,24 @@
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
             </g:if>
-            <f:display bean="user" />
+            <ol class="property-list user">
+
+                <li class="fieldcontain">
+                    <span id="username-label" class="property-label">Username</span>
+                    <div class="property-value" aria-labelledby="username-label">${user.username}</div>
+                </li>
+
+                <li class="fieldcontain">
+                    <span id="password-label" class="property-label">Password</span>
+                    <div class="property-value" aria-labelledby="password-label">hash(${user.password})</div>
+                </li>
+
+                <li class="fieldcontain">
+                <span id="thumbnail-label" class="property-label">Thumbnail</span>
+                <div class="property-value" aria-labelledby="thumbnail-label"><img src="http://localhost:8091/assets/${user.thumbnail.filename}"> </img></div>
+            </li>
+
+            </ol>
             <g:form resource="${this.user}" method="DELETE">
                 <fieldset class="buttons">
                     <g:link class="edit" action="edit" resource="${this.user}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
