@@ -9,7 +9,7 @@ class AnnonceController {
     AnnonceService annonceService
     AnnonceServiceImplService annonceServiceImplService
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -55,13 +55,14 @@ class AnnonceController {
     }
 
     def update(Annonce annonce) {
+        String filename = "myFile"
         if (annonce == null) {
             notFound()
             return
         }
 
         try {
-            annonceService.save(annonce)
+            annonceServiceImplService.uploadFile(annonce,request, filename)
         } catch (ValidationException e) {
             respond annonce.errors, view:'edit'
             return

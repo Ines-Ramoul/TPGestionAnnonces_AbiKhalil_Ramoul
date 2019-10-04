@@ -26,15 +26,52 @@
                 </g:eachError>
             </ul>
             </g:hasErrors>
-            <g:form resource="${this.annonce}" method="PUT">
+        %{--    <g:form resource="${this.annonce}" method="PUT">--}%
+            <form action="/annonce/update/${annonce.id}" method="POST" enctype="multipart/form-data">
                 <g:hiddenField name="version" value="${this.annonce?.version}" />
                 <fieldset class="form">
-                    <f:all bean="annonce"/>
+                    %{--<f:all bean="annonce"/>--}%
+                    <f:field bean="annonce" property="title">
+                        <f:input bean="annonce" property="title"/>
+                    </f:field>
+
+                    <f:field bean="annonce" property="description">
+                        <f:input bean="annonce" property="description"/>
+                    </f:field>
+
+                    <f:field bean="annonce" property="validTill">
+                        <f:input bean="annonce" property="validTill"/>
+                    </f:field>
+
+                    <div class="fieldcontain">
+                    <label >Upload Image</label>
+                    <input type="file" name="myFile" />
+                        <span id="illustrations-label" class="property-label">Illustrations</span>
+                        <div class="property-value" aria-labelledby="illustrations-label">
+                            <ul>
+                                <g:each in="${annonce.illustrations}" var="illustrations">
+                                    <li>
+                                        <a href="/illustration/show/${illustrations.id}">
+                                            <img width="121" height="121" src="http://localhost:8091/assets/${illustrations.filename}"/>
+                                        </a>
+                                    </li>
+                                </g:each>
+                            </ul></div>
+                </div>
+
+                    <f:field bean="annonce" property="state">
+                        <f:input bean="annonce" property="state"/>
+                    </f:field>
+                    <f:field bean="annonce" property="author">
+                        <f:input bean="annonce" property="author"/>
+                    </f:field>
+
                 </fieldset>
                 <fieldset class="buttons">
                     <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
                 </fieldset>
-            </g:form>
+            </form>
+            %{--</g:form>--}%
         </div>
     </body>
 </html>
