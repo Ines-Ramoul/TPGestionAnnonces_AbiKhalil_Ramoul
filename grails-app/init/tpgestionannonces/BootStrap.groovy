@@ -6,7 +6,7 @@ class BootStrap {
 
         def userInstance = new User(username: "Macron",
                 password: "password",
-                thumbnail: new Illustration(filename: "thumb.png")
+                thumbnail: new Illustration(filename: "macron.png")
         ).save(flush: true, failOnError: true)
 
         (1..1).each {
