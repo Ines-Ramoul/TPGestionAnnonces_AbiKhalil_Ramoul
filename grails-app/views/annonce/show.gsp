@@ -43,9 +43,9 @@
                 <ul>
                     <g:each in="${annonce.illustrations}" var="illustrations">
                         <li>
-                            <a href="/illustration/show/${illustrations.id}">
-                                <img width="121" height="121" src="http://localhost:8091/assets/${illustrations.filename}"/>
-                            </a>
+
+                            <img width="121" height="121" src="http://localhost:8091/assets/${illustrations.filename}"/>
+
                         </li>
                     </g:each>
                 </ul></div>

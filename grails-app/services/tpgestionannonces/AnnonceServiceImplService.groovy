@@ -22,9 +22,23 @@ class AnnonceServiceImplService {
         String fileName = System.currentTimeMillis() + f.getOriginalFilename()
         f.transferTo(new File(grailsApplication.config.maconfig.assets_path + fileName))
 
+
         annonce.addToIllustrations(new Illustration(filename:fileName))
         annonceService.save(annonce)
     }
+
+    def deleteFileFromFolder(Long illustrationId){
+        def illustration = Illustration.get(illustrationId)
+        def filename = "C:/Users/Inès Ramoul/Documents/M2 MBDS/Grails/TPGestionAnnonces/grails-app/assets/images/" + illustration.filename
+        def fileDeleted = new File(filename).delete()
+        if (fileDeleted){
+            illustration.delete(flush:true)
+        }
+        else {println "error suppr file"}
+
+    }
+
+
 
 
     def serviceMethod() {

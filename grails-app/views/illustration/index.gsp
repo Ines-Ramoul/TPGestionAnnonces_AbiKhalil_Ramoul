@@ -18,7 +18,21 @@
             <g:if test="${flash.message}">
                 <div class="message" role="status">${flash.message}</div>
             </g:if>
-            <f:table collection="${illustrationList}" />
+
+
+            <table>
+                <thead>
+                <tr>
+                    <th class="sortable"><a href="/user/index?sort=filename&amp;max=10&amp;order=asc">Filename</a></th>
+                </tr>
+                </thead>
+                <g:each in="${illustrationList}" var="instance">
+                    <tr>
+                        <td><g:link controller="illustration" action="show" id="${instance.id}">${instance.filename}<img src="${instance.filename}"/></g:link></td>
+
+                    </tr>
+                </g:each>
+            </table>
 
             <div class="pagination">
                 <g:paginate total="${illustrationCount ?: 0}" />

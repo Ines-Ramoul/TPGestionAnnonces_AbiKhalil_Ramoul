@@ -2,6 +2,8 @@ package tpgestionannonces
 
 import grails.converters.JSON
 import grails.validation.ValidationException
+import org.springframework.web.servlet.ModelAndView
+
 import static org.springframework.http.HttpStatus.*
 
 class AnnonceController {
@@ -108,8 +110,22 @@ class AnnonceController {
         def illustrationId = params.illustrationId
         def annonceId=params.annonceId
         def annonceInstance = Annonce.get(annonceId)
-        def illustrationInstance = Annonce.get(illustrationId)
-        annonceInstance.removeFromIllustrations(illustrationInstance)
+        def illustrationInstance = Illustration.get(illustrationId)
+        if (illustrationInstance==null) {
+            println "pas d'instance illustration"
+            respond annonceInstance, [status: OK]
+        }else {annonceInstance.removeFromIllustrations(illustrationInstance)}
+
         annonceInstance.save(flush:true)
+        //pour delete l'ILLUSTRATION du folder
+        println illustrationId
+        annonceServiceImplService.deleteFileFromFolder(Long.valueOf(params.illustrationId))
+        println annonceInstance.illustrations.empty
+        /*if (annonceInstance.illustrations.empty){
+            annonceInstance.delete(flush:true)
+            render
+        }
+        render status: NO_CONTENT*/
+        render(view: "/annonce/index")
     }
 }

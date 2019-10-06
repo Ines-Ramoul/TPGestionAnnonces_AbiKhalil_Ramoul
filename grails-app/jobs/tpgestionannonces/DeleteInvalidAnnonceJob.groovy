@@ -11,7 +11,7 @@ class DeleteInvalidAnnonceJob {
         def annonceInstance = Annonce.find ("from Annonce as a where a.validTill < :nowDate",[nowDate: new Date()])
         annonceInstance.each {
             println("CIAOOO "+it.id)
-            it.delete(flush: true)
+           // it.delete(flush: true)
         }
         // execute job
     }
