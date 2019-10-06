@@ -108,7 +108,7 @@ class ApiController {
             break
 
         }
-        return response.status = 406
+        return response.status = 200
     }
 
 

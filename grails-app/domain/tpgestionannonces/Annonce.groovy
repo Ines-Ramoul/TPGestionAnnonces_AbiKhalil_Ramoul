@@ -1,5 +1,4 @@
 package tpgestionannonces
-
 class Annonce {
 
     static hasMany = [illustrations : Illustration]
